@@ -12,8 +12,8 @@ class App extends Component {
     };
   }
   componentDidMount() {
-    database.ref('/').on('value', () => {
-      console.log('DATA CHANGED!');
+    database.ref('/').on('value', (snapshot) => {
+      console.log('DATA CHANGED!', snapshot.val());
     });
   }
   render() {

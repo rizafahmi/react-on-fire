@@ -8,9 +8,23 @@ class App extends Component {
     super(props);
 
     this.state = {
-      data: null
+      data: null,
+      newData: ''
     };
   }
+  handleChange = (e) => {
+    const newData = e.target.value;
+    this.setState({
+      newData
+    });
+  };
+  handleSubmit = (e) => {
+    e.preventDefault();
+    database
+      .ref('/')
+      .child('AMAZINGNEWDATA')
+      .set(this.state.newData);
+  };
   componentDidMount() {
     database.ref('/').on('value', (snapshot) => {
       this.setState({
@@ -24,6 +38,10 @@ class App extends Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <pre>{JSON.stringify(this.state.data, null, 2)}</pre>
+          <form onSubmit={this.handleSubmit}>
+            <input type="text" onChange={this.handleChange} />
+            <button type="submit">Send</button>
+          </form>
         </header>
       </div>
     );

@@ -3,7 +3,7 @@ import { database } from './firebase.js';
 
 import List from './components/List.js';
 import Add from './components/Add.js';
-import './App.css';
+import './App.scss';
 
 class App extends Component {
   constructor(props) {

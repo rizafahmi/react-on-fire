@@ -1,0 +1,11 @@
+@import 'constants.scss';
+
+body {
+  background-color: $bg;
+  font-size: $fontSize;
+}
+
+.container {
+  margin-top: $top;
+  margin-left: $left;
+}

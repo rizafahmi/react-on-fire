@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { database } from './firebase.js';
-import logo from './logo.svg';
+
+import List from './components/List.js';
+import Add from './components/Add.js';
 import './App.css';
 
 class App extends Component {
@@ -22,7 +24,7 @@ class App extends Component {
   };
   handleSubmit = (e) => {
     e.preventDefault();
-    this.dbRef.push({ title: this.state.newData });
+    this.dbRef.push({ title: this.state.newData, upvote: 0, downvote: 0 });
   };
   componentDidMount() {
     this.dbRef = database.ref('/posts');
@@ -33,16 +35,14 @@ class App extends Component {
     });
   }
   render() {
+    const { data } = this.state;
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <pre>{JSON.stringify(this.state.data, null, 2)}</pre>
-          <form onSubmit={this.handleSubmit}>
-            <input type="text" onChange={this.handleChange} />
-            <button type="submit">Send</button>
-          </form>
-        </header>
+      <div className="container">
+        <Add
+          handleSubmit={this.handleSubmit}
+          handleChange={this.handleChange}
+        />
+        {data ? <List posts={data} /> : <h2>Loading...</h2>}
       </div>
     );
   }

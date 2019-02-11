@@ -13,7 +13,9 @@ class App extends Component {
   }
   componentDidMount() {
     database.ref('/').on('value', (snapshot) => {
-      console.log('DATA CHANGED!', snapshot.val());
+      this.setState({
+        data: snapshot.val()
+      });
     });
   }
   render() {
@@ -21,7 +23,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <p>Data from firebase will be here...</p>
+          <pre>{JSON.stringify(this.state.data, null, 2)}</pre>
         </header>
       </div>
     );

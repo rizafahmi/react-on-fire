@@ -22,10 +22,10 @@ class App extends Component {
   };
   handleSubmit = (e) => {
     e.preventDefault();
-    this.dbRef.push(this.state.newData);
+    this.dbRef.push({ title: this.state.newData });
   };
   componentDidMount() {
-    this.dbRef = database.ref('/AMAZINGNEWDATA');
+    this.dbRef = database.ref('/posts');
     this.dbRef.on('value', (snapshot) => {
       this.setState({
         data: snapshot.val()

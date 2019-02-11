@@ -20,10 +20,7 @@ class App extends Component {
   };
   handleSubmit = (e) => {
     e.preventDefault();
-    database
-      .ref('/')
-      .child('AMAZINGNEWDATA')
-      .set(this.state.newData);
+    database.ref('/AMAZINGNEWDATA').push(this.state.newData);
   };
   componentDidMount() {
     database.ref('/').on('value', (snapshot) => {

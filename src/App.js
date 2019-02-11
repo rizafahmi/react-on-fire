@@ -11,6 +11,8 @@ class App extends Component {
       data: null,
       newData: ''
     };
+
+    this.dbRef = null;
   }
   handleChange = (e) => {
     const newData = e.target.value;
@@ -20,10 +22,11 @@ class App extends Component {
   };
   handleSubmit = (e) => {
     e.preventDefault();
-    database.ref('/AMAZINGNEWDATA').push(this.state.newData);
+    this.dbRef.push(this.state.newData);
   };
   componentDidMount() {
-    database.ref('/').on('value', (snapshot) => {
+    this.dbRef = database.ref('/AMAZINGNEWDATA');
+    this.dbRef.on('value', (snapshot) => {
       this.setState({
         data: snapshot.val()
       });

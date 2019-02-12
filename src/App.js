@@ -15,6 +15,14 @@ class App extends Component {
 
     this.dbRef = null;
   }
+  componentDidMount() {
+    this.dbRef = database.ref('/posts');
+    this.dbRef.on('value', (snapshot) => {
+      this.setState({
+        data: snapshot.val()
+      });
+    });
+  }
   handleChange = (e) => {
     const newData = e.target.value;
     this.setState({
@@ -25,14 +33,17 @@ class App extends Component {
     e.preventDefault();
     this.dbRef.push({ title: this.state.newData, upvote: 0, downvote: 0 });
   };
-  componentDidMount() {
-    this.dbRef = database.ref('/posts');
-    this.dbRef.on('value', (snapshot) => {
-      this.setState({
-        data: snapshot.val()
-      });
+  handleUpvote = (e, post, key) => {
+    const { title, upvote, downvote } = post;
+    this.dbRef.child(`${key}`).set({
+      title,
+      upvote: post.upvote + 1,
+      downvote
     });
-  }
+  };
+  handleDownvote = (e) => {
+    console.log('Downvote');
+  };
   render() {
     const { data } = this.state;
     return (
@@ -41,7 +52,15 @@ class App extends Component {
           handleSubmit={this.handleSubmit}
           handleChange={this.handleChange}
         />
-        {data ? <List posts={data} /> : <h2>Loading...</h2>}
+        {data ? (
+          <List
+            handleUpvote={this.handleUpvote}
+            handleDownvote={this.handleDownvote}
+            posts={data}
+          />
+        ) : (
+          <h2>Loading...</h2>
+        )}
       </div>
     );
   }

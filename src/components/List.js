@@ -1,6 +1,6 @@
 import React from 'react';
 
-const List = ({ posts }) => {
+const List = ({ posts, handleUpvote, handleDownvote }) => {
   return (
     <div className="my-6 mx-3 font-sans text-2xl text-grey-darker">
       {Object.keys(posts).map((key) => (
@@ -10,11 +10,11 @@ const List = ({ posts }) => {
         >
           <div className="buttons text-4xl pr-6">
             <div className="upvoteContainer">
-              <button>🔼</button>
+              <button onClick={(e) => handleUpvote(e, posts[key], key)}>🔼</button>
             </div>
 
             <div className="upvoteContainer">
-              <button>🔽</button>
+              <button onClick={handleDownvote}>🔽</button>
             </div>
           </div>
           <div className="content">

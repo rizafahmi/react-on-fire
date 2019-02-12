@@ -1,25 +1,34 @@
 import React from 'react';
-import './List.scss';
 
 const List = ({ posts }) => {
   return (
-    <div className="listing">
+    <div className="my-6 mx-3 font-sans text-2xl text-grey-darker">
       {Object.keys(posts).map((key) => (
-        <div key={key}>
-          <div className="title">{posts[key].title}</div>
-          <div className="votes">
-            <div>
-              <span role="img" aria-label="thumbs-up">
-                👍
-              </span>
-              <span>{posts[key].upvote || 0}</span>
+        <div
+          key={key}
+          className="bg-blue-lightest shadow border rounded p-6 my-3"
+        >
+          <div className="buttons text-4xl">
+            <div className="upvoteContainer">
+              <button>🔼</button>
             </div>
-            <span>
+
+            <div className="upvoteContainer">
+              <button>🔽</button>
+            </div>
+          </div>
+          <div className="content">
+            <div className="title text-4xl">{posts[key].title}</div>
+            <div className="votes text-grey py-2 px-3">
+              <span role="img" aria-label="thumbs-up" className="pr-2">
+                👍
+                <span className="pl-2">{posts[key].upvote || 0}</span>
+              </span>{' '}
               <span role="img" aria-label="thumbs-down">
                 👎
-              </span>{' '}
-              {posts[key].downvote || 0}
-            </span>
+                <span className="pl-2">{posts[key].downvote || 0}</span>
+              </span>
+            </div>
           </div>
         </div>
       ))}

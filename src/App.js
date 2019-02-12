@@ -3,7 +3,6 @@ import { database } from './firebase.js';
 
 import List from './components/List.js';
 import Add from './components/Add.js';
-import './App.scss';
 
 class App extends Component {
   constructor(props) {
@@ -37,7 +36,7 @@ class App extends Component {
   render() {
     const { data } = this.state;
     return (
-      <div className="container">
+      <div className="container mx-auto px-4 py-8">
         <Add
           handleSubmit={this.handleSubmit}
           handleChange={this.handleChange}

@@ -6,9 +6,9 @@ const List = ({ posts }) => {
       {Object.keys(posts).map((key) => (
         <div
           key={key}
-          className="bg-blue-lightest shadow border rounded p-6 my-3"
+          className="flex bg-blue-lightest shadow border rounded p-6 my-3"
         >
-          <div className="buttons text-4xl">
+          <div className="buttons text-4xl pr-6">
             <div className="upvoteContainer">
               <button>🔼</button>
             </div>

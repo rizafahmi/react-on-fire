@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const List = ({ posts, handleUpvote, handleDownvote }) => {
   const sortByVote = (a, b) =>
@@ -25,7 +26,9 @@ const List = ({ posts, handleUpvote, handleDownvote }) => {
               </div>
             </div>
             <div className="content">
-              <div className="title text-4xl">{posts[key].title}</div>
+              <div className="title text-4xl">
+                <Link to={`/detail/${key}`}>{posts[key].title}</Link>
+              </div>
               <div className="votes text-grey py-2 px-3">
                 <span role="img" aria-label="thumbs-up" className="pr-2">
                   👍
